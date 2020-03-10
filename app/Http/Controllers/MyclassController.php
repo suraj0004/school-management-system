@@ -30,7 +30,11 @@ class MyclassController extends Controller
     {
         //
     }
-
+    
+    public function redirectToAddClass()
+    {
+       return view('school.add-class');
+    }
     /**
      * Store a newly created resource in storage.
      *
@@ -47,7 +51,7 @@ class MyclassController extends Controller
       $tb->school_id = \Auth::user()->school_id;
       $tb->group = (!empty($request->group))?$request->group:'';
       $tb->save();
-      return back()->with('status', __('Created'));
+      return redirect('school/sections?course=1')->with('status', __('Created'));
     }
 
     /**

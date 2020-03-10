@@ -44,6 +44,16 @@ class SectionController extends Controller
         //
     }
 
+    public function redirectToAddSection()
+    {
+        $classes = \App\Myclass::bySchool(\Auth::user()->school->id)
+        ->select('id','class_number')
+        ->get()
+        ->toArray();
+        return view('school.add-section',[
+            'classes'=>$classes,
+          ]);
+    }
     /**
      * Store a newly created resource in storage.
      *
@@ -62,7 +72,7 @@ class SectionController extends Controller
       $tb->room_number = $request->room_number;
       $tb->class_id = $request->class_id;
       $tb->save();
-      return back()->with('status', __('Created'));
+      return redirect('school/sections?course=1')->with('status', __('Created'));
     }
 
     /**

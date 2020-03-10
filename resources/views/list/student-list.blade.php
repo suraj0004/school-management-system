@@ -9,6 +9,7 @@
             @include('layouts.leftside-menubar')
         </div>
         <div class="col-md-10" id="main-container">
+            <div class=""> <a class="btn btn-primary" href="{{ url('register/student') }}" > Add Student </a> </div>
             <div class="panel panel-default">
               @if(count($users) > 0)
               @foreach ($users as $user)

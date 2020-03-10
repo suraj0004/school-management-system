@@ -14,6 +14,8 @@
             @include('layouts.leftside-menubar')
         </div>
         <div class="col-md-10" id="main-container">
+        <div class=""> <a class="btn btn-primary" href="{{ url('school/add-class') }}" > Add Class </a> </div>
+        <div class=""> <a class="btn btn-primary" href="{{ url('school/add-section') }}" > Add Section </a> </div>
             <h2>@lang('All Classes and Sections')</h2>
             <div class="panel panel-default" id="cls-sec">
               @if(count($classes) > 0)

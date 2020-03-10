@@ -179,7 +179,11 @@ Route::middleware(['auth','master'])->group(function (){
 
 Route::middleware(['auth','admin'])->group(function (){
   Route::prefix('school')->name('school.')->group(function (){
+
+ 
+    Route::get('add-class','MyclassController@redirectToAddClass');
     Route::post('add-class','MyclassController@store');
+    Route::get('add-section','SectionController@redirectToAddSection');
     Route::post('add-section','SectionController@store');
     Route::post('add-department','SchoolController@addDepartment');
     Route::get('promote-students/{section_id}','UserController@promoteSectionStudents');
