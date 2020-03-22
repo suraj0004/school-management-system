@@ -21,9 +21,9 @@
                             {{ session('status') }}
                         </div>
                     @endif
-                    @component('components.file-uploader',['upload_type'=>'syllabus'])
+                    @component('components.file-uploader',['upload_type'=>'syllabus','class_id' => $class_id,'class_number' => $class_number,'classes' => $classes])
                     @endcomponent
-                    @component('components.uploaded-files-list',['files'=>$files,'parent'=>($class_id !== 0)?'class':'','upload_type'=>'syllabus'])
+                    @component('components.uploaded-files-list',['files'=>$files,'parent'=>($class_id !== 0)?'class':'class','upload_type'=>'syllabus'])
                     @endcomponent
                 </div>
             </div>

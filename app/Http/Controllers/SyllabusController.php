@@ -6,7 +6,7 @@ use App\Syllabus as Syllabus;
 use App\Http\Resources\SyllabusResource;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Schema;
-
+use App\MyClass as MyClass;
 class SyllabusController extends Controller
 {
     /**
@@ -20,7 +20,13 @@ class SyllabusController extends Controller
                           ->bySchool(\Auth::user()->school_id)
                           ->where('active',1)
                           ->get();
-        return view('syllabus.course-syllabus',['files'=>$files,'class_id' => 0]);
+      $classes = Myclass::bySchool(\Auth::user()->school->id)
+                          ->select('id','class_number','group')
+                          ->get()
+                          ->toArray();
+                       
+        // print_r($classes);die;
+        return view('syllabus.course-syllabus',['files'=>$files,'class_id' => 0,'class_number' => '','classes' => $classes]);
      }
 
     /**
@@ -37,6 +43,7 @@ class SyllabusController extends Controller
                           ->where('class_id', $class_id)
                           ->where('active',1)
                           ->get();
+        $class = MyClass::select('class_number','group')->where('id',$class_id)->first();
         } else {
           return '<code>class_id</code> column missing. Run <code>php artisan migrate</code>';
         }
@@ -44,7 +51,7 @@ class SyllabusController extends Controller
         return 'Something went wrong!!';
       }
 
-      return view('syllabus.course-syllabus',['files'=>$files,'class_id'=>$class_id]);
+      return view('syllabus.course-syllabus',['files'=>$files,'class_id'=>$class_id,'class_number' => $class->class_number." ".$class->group,'classes' => [] ]);
     }
 
     /**

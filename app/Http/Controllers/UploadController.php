@@ -78,6 +78,7 @@ class UploadController extends Controller {
       $tb->active = 1;
       $tb->school_id = auth()->user()->school_id;
       $tb->user_id = auth()->user()->id;
+      $tb->class_id = $request->class_id;
       $tb->save();
     } else if($request->upload_type == 'profile' && $request->user_id > 0){
       $tb = \App\User::find($request->user_id);
