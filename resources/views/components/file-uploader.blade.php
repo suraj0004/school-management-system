@@ -1,9 +1,19 @@
 <div id="my_upload">
     @if($upload_type != 'profile')
-        <h3>{{__(ucfirst($upload_type))}}</h3>
+        <h3>{{__(ucfirst($upload_type))}}  @if( isset($class_id) && $class_id != 0) for class {{$class_number}}  @endif </h3>
         <label for="upload-title">@lang('File Title'): </label>
         <input type="text" class="form-control" name="upload-title" id="upload-title" placeholder="@lang('File title here...')" required>
+        
         <br/>
+
+        @if(isset($class_id) && $class_id == 0)
+        <select id="class_id" name="class_id" class="form-control">
+            <option value=""> -- Select Class --</option>
+            @foreach($classes as $class)
+        <option value="{{ $class['id'] }}"> {{ $class['class_number']." ".$class['group'] }}  </option>
+            @endforeach
+        </select>
+        @endif
     @endif
   <input class="form-control-sm" id="fileupload" type="file"  accept=".xlsx,.xls,.doc,.docx,.ppt,.pptx,.txt,.pdf,image/png,image/jpeg" name="file" data-url="{{url('upload/file')}}">
   <br/>
@@ -61,7 +71,13 @@ $(function () {
                             data.context.text(@json( __('File Upload has been canceled')));
                         });
                         @if($upload_type != 'profile')
+                            @if($upload_type == 'syllabus' && $class_id == 0)
+                            data.formData = {upload_type: '{{$upload_type}}',title: $('#upload-title').val(),class_id: $('#class_id').val() };
+                            @elseif($upload_type == 'syllabus' && $class_id != 0)
+                            data.formData = {upload_type: '{{$upload_type}}',title: $('#upload-title').val(),class_id: '{{$class_id}}' };
+                            @else
                             data.formData = {upload_type: '{{$upload_type}}',title: $('#upload-title').val()};
+                            @endif
                         @else
                             data.formData = {upload_type: '{{$upload_type}}',user_id: $('#userIdPic').val()};
                         @endif
