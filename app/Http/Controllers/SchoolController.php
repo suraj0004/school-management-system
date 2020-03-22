@@ -67,6 +67,14 @@ class SchoolController extends Controller
         return redirect()->route('schools.index');
     }
 
+
+    
+    public function redirectToAddDepartment()
+    {
+       
+        return view('school.add-department');
+    }
+
     public function addDepartment(Request $request){
       $request->validate([
         'department_name' => 'required|string|max:50',

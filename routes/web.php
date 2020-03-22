@@ -183,9 +183,13 @@ Route::middleware(['auth','admin'])->group(function (){
  
     Route::get('add-class','MyclassController@redirectToAddClass');
     Route::post('add-class','MyclassController@store');
+
     Route::get('add-section','SectionController@redirectToAddSection');
     Route::post('add-section','SectionController@store');
+
+    Route::get('add-department','SchoolController@redirectToAddDepartment');
     Route::post('add-department','SchoolController@addDepartment');
+
     Route::get('promote-students/{section_id}','UserController@promoteSectionStudents');
     Route::post('promote-students','UserController@promoteSectionStudentsPost');
     Route::post('theme','SchoolController@changeTheme');
