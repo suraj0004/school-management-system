@@ -15,13 +15,14 @@
         </div>
         <div class="col-md-10" id="main-container">
             <div class="panel panel-default">
+                <div class="page-panel-title">@lang('Add Syllabus') @if( isset($class_id) && $class_id != 0) for class {{$class_number}}  @endif </div>
                 <div class="panel-body">
                     @if (session('status'))
                         <div class="alert alert-success">
                             {{ session('status') }}
                         </div>
                     @endif
-                    @component('components.file-uploader',['upload_type'=>'syllabus','class_id' => $class_id,'class_number' => $class_number,'classes' => $classes])
+                    @component('components.file-uploader',['upload_type'=>'syllabus','class_id' => $class_id,'classes' => $classes])
                     @endcomponent
                     @component('components.uploaded-files-list',['files'=>$files,'parent'=>($class_id !== 0)?'class':'class','upload_type'=>'syllabus'])
                     @endcomponent
