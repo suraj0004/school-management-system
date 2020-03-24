@@ -1,6 +1,6 @@
 <div id="my_upload">
     @if($upload_type != 'profile')
-        <h3>{{__(ucfirst($upload_type))}}  @if( isset($class_id) && $class_id != 0) for class {{$class_number}}  @endif </h3>
+        <h3>{{__(ucfirst($upload_type))}}   </h3>
         <label for="upload-title">@lang('File Title'): </label>
         <input type="text" class="form-control" name="upload-title" id="upload-title" placeholder="@lang('File title here...')" required>
         
